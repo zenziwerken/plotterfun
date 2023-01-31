@@ -55,7 +55,8 @@ onmessage = function (e) {
           theta+=0.5
           if (theta>6.3) radius-=0.1 //do one full loop before spiraling in
         }
-        spirals.push(spiral)
+        if (spiral.length>0)
+          spirals.push(spiral)
       } break;
 
       default: //Circles
