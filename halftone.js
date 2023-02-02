@@ -23,7 +23,8 @@ onmessage = function (e) {
   let hm = major / 2
   let tog = false
   let circles = []
-  let lines = []
+  let lines   = []
+  let spirals = []
 
   for (let y = hm; y < config.height; y += major) {
     tog = !tog;
@@ -32,15 +33,14 @@ onmessage = function (e) {
       //circles in the pixel center
       let z = getPixel(x, y);
       if (z < config.Cutoff) continue;
-      let radious = z * hm / 255 * factor / 100;
-
+      let radius = z * hm / 255 * factor / 100;
       switch (type) {
 
       case 'Diamond': {
-        let p1 = [x - radious, y];
-        let p2 = [x, y - radious];
-        let p3 = [x + radious, y];
-        let p4 = [x, y + radious];
+        let p1 = [x - radius, y];
+        let p2 = [x, y - radius];
+        let p3 = [x + radius, y];
+        let p4 = [x, y + radius];
         lines.push([p1, p2]);
         lines.push([p2, p3]);
         lines.push([p3, p4]);
@@ -50,17 +50,21 @@ onmessage = function (e) {
       // adapted from stipple.js
       case 'Spirals': {
         let theta=0, spiral=[]
+        if (radius>=0.2) {
         while (radius>=0.1) {
           spiral.push( [(x - hm / 2) + radius*Math.cos(theta), (y - hm / 2) + radius*Math.sin(theta)] )
           theta+=0.5
           if (theta>6.3) radius-=0.1 //do one full loop before spiraling in
         }
-        if (spiral.length>0)
-          spirals.push(spiral)
+      }
+      if (spiral.length>0)
+        spirals.push(spiral)
       } break;
 
       default: //Circles
         circles.push({ x: x - hm / 2, y: y - hm / 2, r: radius });
+      }
+      
     }
   }
 
