@@ -26,17 +26,17 @@ onmessage = function (e) {
     // User variables
     const minlength = config.Minlength // dont output short line segments
 
-    const spacing_h = config['Spacing horizontal']
-    const spacing_down = config['Spacing down']
-    const spacing_up   = config['Spacing up']
+    const spacing_h   = config['Spacing horizontal']
+    const spacing_d   = config['Spacing down']
+    const spacing_u   = config['Spacing up']
 
     const threshold_h = config['Threshold horizontal']
-    const threshold_down = config['Threshold down']
-    const threshold_up   = config['Threshold up']
+    const threshold_d = config['Threshold down']
+    const threshold_u = config['Threshold up']
 
-    //const minlength = config.Minlength // dont output short line segments
     const w = config.width
     const h = config.height
+    
     function inside(x,y){ return (x>=0 && y>=0 && x<w && y<h) }
     
     let points = [];
@@ -66,7 +66,7 @@ onmessage = function (e) {
         points = points.concat(thisline)
     }
 
-    for (let y = -(w + h); y <= (w + h); y += spacing_down) {
+    for (let y = -(w + h); y <= (w + h); y += spacing_d) {
         let mode = false
         let thisline = []
         let storex, storey
@@ -75,11 +75,11 @@ onmessage = function (e) {
             yy = y + x
             if (inside(x,yy)) {
                 pixelval = getPixel(x,yy);
-                if (pixelval > threshold_down && mode == false) {
+                if (pixelval > threshold_d && mode == false) {
                     mode = true
                     storex = x, storey = yy;
                 }
-                if (pixelval < threshold_down && mode == true ) {
+                if (pixelval < threshold_d && mode == true ) {
                     if (yy - storey > minlength / 2) {
                         thisline.push([[storex,storey], [x,yy]]);
                     }
@@ -93,7 +93,7 @@ onmessage = function (e) {
         points = points.concat(thisline)
     }
 
-    for (let y = (w + h); y >= -(w + h); y -= spacing_up) {
+    for (let y = (w + h); y >= -(w + h); y -= spacing_u) {
         let mode = false
         let thisline = []
         let storex, storey
@@ -102,11 +102,11 @@ onmessage = function (e) {
             yy = y - x
             if (inside(x,yy)) {
                 pixelval = getPixel(x,yy);
-                if (pixelval > threshold_up && mode == false) {
+                if (pixelval > threshold_u && mode == false) {
                     mode = true
                     storex = x, storey = yy;
                 }
-                if (pixelval < threshold_up && mode == true ) {
+                if (pixelval < threshold_u && mode == true ) {
                     if (yy - storey > minlength / 2) {
                         thisline.push([[storex,storey], [x,yy]]);
                     }
