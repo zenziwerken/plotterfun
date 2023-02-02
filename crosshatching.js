@@ -66,12 +66,12 @@ onmessage = function (e) {
         points = points.concat(thisline)
     }
 
-    for (let y = -h; y <= h; y += spacing_down) {
+    for (let y = -(w + h); y <= (w + h); y += spacing_down) {
         let mode = false
         let thisline = []
         let storex, storey
         let yy
-        for (let x = 0; x <= w; x++) {
+        for (let x = 0; x <= (2 * w); x++) {
             yy = y + x
             if (inside(x,yy)) {
                 pixelval = getPixel(x,yy);
@@ -93,12 +93,12 @@ onmessage = function (e) {
         points = points.concat(thisline)
     }
 
-    for (let y = (2 * h); y >= -h; y -= spacing_up) {
+    for (let y = (w + h); y >= -(w + h); y -= spacing_up) {
         let mode = false
         let thisline = []
         let storex, storey
         let yy
-        for (let x = w; x >= 0; x--) {
+        for (let x = w; x >= -w; x--) {
             yy = y - x
             if (inside(x,yy)) {
                 pixelval = getPixel(x,yy);
