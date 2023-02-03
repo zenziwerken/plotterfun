@@ -7,14 +7,14 @@ importScripts('helpers.js')
 postMessage(['sliders', defaultControls.concat([
     { label: 'Minlength', value: 2, min: 0, max: 32, step: 1 },
 
-    { label: 'Spacing horizontal',   value:  12, min: 1, max:  20, step: 1 },
-    { label: 'Threshold horizontal', value:  60, min: 0, max: 255, step: 1 },
+    { label: 'Spacing down',   value:  10, min: 1, max:  20, step: 1 },
+    { label: 'Threshold down', value:  70, min: 0, max: 255, step: 1 },
 
-    { label: 'Spacing down',   value:  9, min: 1, max:  20, step: 1 },
-    { label: 'Threshold down', value:  120, min: 0, max: 255, step: 1 },
+    { label: 'Spacing up',     value:   7, min: 1, max:  20, step: 1 },
+    { label: 'Threshold up',   value: 150, min: 0, max: 255, step: 1 },
 
-    { label: 'Spacing up',     value:   5, min: 1, max:  20, step: 1 },
-    { label: 'Threshold up',   value: 200, min: 0, max: 255, step: 1 },
+    { label: 'Spacing horizontal',   value:  5, min: 1, max:  20, step: 1 },
+    { label: 'Threshold horizontal', value:  200, min: 0, max: 255, step: 1 },
 ])]);
 
 
@@ -69,11 +69,12 @@ onmessage = function (e) {
     for (let y = -(w + h); y <= (w + h); y += spacing_d) {
         let mode = false
         let thisline = []
-        let storex, storey
-        let yy
-        for (let x = 0; x <= (2 * w); x++) {
-            yy = y + x
+        let storex, storey, lastx,lasty, yy
+        for (let x = 0; x <= (2 * w); x += .5) {
+            yy = y + x / 2
             if (inside(x,yy)) {
+                lastx = x;
+                lasty = yy;
                 pixelval = getPixel(x,yy);
                 if (pixelval > threshold_d && mode == false) {
                     mode = true
@@ -88,7 +89,7 @@ onmessage = function (e) {
             }
         }
         if (mode == true) {
-            thisline.push([[storex,storey], [h - y ,h]]);
+            thisline.push([[storex,storey], [lastx,lasty]]);
         }
         points = points.concat(thisline)
     }
@@ -96,11 +97,13 @@ onmessage = function (e) {
     for (let y = (w + h); y >= -(w + h); y -= spacing_u) {
         let mode = false
         let thisline = []
-        let storex, storey
+        let storex, storey, lastx, lasty
         let yy
         for (let x = w; x >= -w; x--) {
-            yy = y - x
+            yy = y - x / 2
             if (inside(x,yy)) {
+                lastx = x;
+                lasty = yy;
                 pixelval = getPixel(x,yy);
                 if (pixelval > threshold_u && mode == false) {
                     mode = true
@@ -115,7 +118,7 @@ onmessage = function (e) {
             }
         }
         if (mode == true) {
-            thisline.push([[storex,storey], [0 ,y]]);
+            thisline.push([[storex,storey], [lastx,lasty]]);
         }
         points = points.concat(thisline)
     }
