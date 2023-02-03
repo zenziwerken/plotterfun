@@ -97,8 +97,7 @@ onmessage = function (e) {
     for (let y = (w + h); y >= -(w + h); y -= spacing_u) {
         let mode = false
         let thisline = []
-        let storex, storey, lastx, lasty
-        let yy
+        let storex, storey, lastx, lasty, yy
         for (let x = w; x >= -w; x--) {
             yy = y - x / 2
             if (inside(x,yy)) {
