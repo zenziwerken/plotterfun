@@ -5,7 +5,7 @@ postMessage(['sliders', defaultControls.concat([
   {label: 'Sublines', value: 3, min: 1, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
   {label: 'Sampling', value: 1, min: 0.5, max: 5, step: 0.1},
-  { label: 'Direction', type:'select', options:['Horizontal', 'Vertical']},
+  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical']},
 ])]);
 
 
@@ -50,8 +50,8 @@ onmessage = function(e) {
         line.push([x + (amplitude * j * getPixel(x, height)), height]);
   
         if (r_sum > 1) {
-          line.push([x - (amplitude * j * getPixel(height, x)), height])
-          for (let y = height; y >=0 ; y -= incr_y) {
+          line.push([x - (amplitude * j * getPixel(x, height)), height])
+          for (let y = height; y > 0 ; y -= incr_y) {
             let z = getPixel(x, y)
             let r = amplitude * j * z;
             if (r.toFixed(precision) != lastr.toFixed(precision)) {
