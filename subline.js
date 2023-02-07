@@ -47,7 +47,7 @@ onmessage = function(e) {
               cx + (radius + displacement) * Math.sin(theta) ,
               cy + (radius + displacement) * Math.cos(theta)
             ])
-            line2.push([
+            if (j > 0) line2.push([
               cx + (radius - displacement) * Math.sin(theta) ,
               cy + (radius - displacement) * Math.cos(theta)
             ])
@@ -59,7 +59,7 @@ onmessage = function(e) {
           y = Math.floor( cy + radius * Math.cos(theta));
         }
         squiggleData.push(line);
-        squiggleData2.push(line2);
+        if (j > 0) squiggleData2.push(line2);
       }
       squiggleData = squiggleData.concat(squiggleData2)
     } break;
