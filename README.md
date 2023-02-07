@@ -4,8 +4,8 @@ I came across Pltterfun 'cause I built a [Universal Pen Holder](https://www.zenz
 
 Fork from https://github.com/mitxela/plotterfun with a few changes and a new algorithm:
 * Crosshatching [NEW]
-* Halftone [ADD: Options spirals]
-* Subline [ADD: vertical option, reduced pointcount, removed unnescessairy double lines]
+* Halftone [ADD: option spirals]
+* Subline [ADD: option vertical option, reduced pointcount, removed unnecessary double lines]
 
 
 ![crosshatching](/screenshots/crosshatching.webp)
