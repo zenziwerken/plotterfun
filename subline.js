@@ -5,7 +5,7 @@ postMessage(['sliders', defaultControls.concat([
   {label: 'Sublines', value: 3, min: 1, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
   {label: 'Sampling', value: 1, min: 0.5, max: 5, step: 0.1},
-  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical']},
+  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral']},
 ])]);
 
 
@@ -26,6 +26,43 @@ onmessage = function(e) {
   let lastr = -1;
 
   switch (direction) {
+
+    case 'Spiral': {
+      const cx = config.width / 2;
+      const cy = config.height / 2;
+      const spacing = width / 5 / config['Line Count'];
+      let squiggleData2 = [];
+      function inside(x,y){ return (x>=0 && y>=0 && x<width && y<height) }
+      for (let j = 0; j < sublines; j++) {
+        let radius = 5;
+        let theta = 0;
+        let x = cx, y = cy;
+        let line  = [];
+        let line2 = [];
+        while ((x > 0 && y > 0) && (x < width && y < height)) {
+          if (inside(x,y)) {
+            z = getPixel( x , y );
+            let displacement = z * amplitude * 2 * j;
+            line.push([
+              cx + (radius + displacement) * Math.sin(theta) ,
+              cy + (radius + displacement) * Math.cos(theta)
+            ])
+            line2.push([
+              cx + (radius - displacement) * Math.sin(theta) ,
+              cy + (radius - displacement) * Math.cos(theta)
+            ])
+          }
+          let incr = Math.asin(1/radius);
+          radius += incr * spacing;
+          theta  += incr;
+          x = Math.floor( cx + radius * Math.sin(theta));
+          y = Math.floor( cy + radius * Math.cos(theta));
+        }
+        squiggleData.push(line);
+        squiggleData2.push(line2);
+      }
+      squiggleData = squiggleData.concat(squiggleData2)
+    } break;
 
     case 'Vertical': {
     const incr_x    = Math.floor(height / lineCount);
@@ -68,7 +105,8 @@ onmessage = function(e) {
       }
     }
   } break;
-  default: //Horizontal
+
+  default: // Horizontal
     const incr_x    = config.Sampling;
     const incr_y    = Math.floor(width / lineCount);
     for (let y = 0; y <= height; y += incr_y) {
@@ -102,7 +140,7 @@ onmessage = function(e) {
       }
     }
   }
-  if (squiggleData.length>0)
+  if (squiggleData.length > 0)
     postLines(squiggleData);
 }
 
