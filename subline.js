@@ -5,7 +5,7 @@ postMessage(['sliders', defaultControls.concat([
   {label: 'Sublines', value: 3, min: 1, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
   {label: 'Sampling', value: 1, min: 0.5, max: 5, step: 0.1},
-  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral']},
+  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
 ])]);
 
 
@@ -27,7 +27,8 @@ onmessage = function(e) {
 
   switch (direction) {
 
-    case 'Spiral': {
+    case 'Spiral cw':
+    case 'Spiral ccw': {
       const cx = config.width / 2;
       const cy = config.height / 2;
       const spacing = width / 5 / config['Line Count'];
@@ -54,7 +55,10 @@ onmessage = function(e) {
           }
           let incr = Math.asin(1/radius);
           radius += incr * spacing;
-          theta  += incr;
+          switch (direction) {
+            case 'Spiral cw': theta  -= incr; break;
+            case 'Spiral ccw': theta  += incr;
+          }
           x = Math.floor( cx + radius * Math.sin(theta));
           y = Math.floor( cy + radius * Math.cos(theta));
         }
