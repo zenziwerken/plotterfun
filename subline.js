@@ -1,11 +1,11 @@
 importScripts('helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
+  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
   {label: 'Line Count', value: 50, min: 10, max: 200},
   {label: 'Sublines', value: 3, min: 1, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
   {label: 'Sampling', value: 1, min: 0.5, max: 5, step: 0.1},
-  {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
 ])]);
 
 
