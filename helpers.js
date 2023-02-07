@@ -1,9 +1,9 @@
 defaultControls = [
-  {label: 'Inverted', type:'checkbox'},
-  {label: 'Brightness', value: 0, min: -100, max: 100},
-  {label: 'Contrast', value: 0, min: -100, max: 100},
-  {label: 'Min brightness', value: 0, min: 0, max: 255},
-  {label: 'Max brightness', value: 255, min: 0, max: 255},
+  {label: 'Inverted', type:'checkbox', key: 'Image'},
+  {label: 'Brightness', value: 0, min: -100, max: 100, key: 'Image'},
+  {label: 'Contrast', value: 0, min: -100, max: 100, key: 'Image'},
+  {label: 'Min brightness', value: 0, min: 0, max: 255, key: 'Image'},
+  {label: 'Max brightness', value: 255, min: 0, max: 255, key: 'Image'},
 ]
 
 

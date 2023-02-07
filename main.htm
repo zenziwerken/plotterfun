@@ -32,6 +32,7 @@ canvas{ /* checkerboard pattern */
   background-size: 40px 40px;
   background-position: 0 0, 20px 20px;
 }
+#tabImage {display:none}
 </style>
 <link rel=stylesheet href=range.css>
 
@@ -89,6 +90,8 @@ Algorithm:
 </select>
 <img id=buffering src=loading.gif style='vertical-align:middle; display:inline-block; visibility:hidden;'>
 </form>
+<div id=tabbar><button id=tab3 onclick='tabShowAlgorithmControls()'>Algorithm controls</button><button id=tab4 onclick='tabShowImageControls()'>Image controls</button></div>
+<form id=imageParams></form>
 <form id=algoParams></form>
 
 <button style='font-size:large; margin:10px' onclick=download()>Download SVG</button>
@@ -150,6 +153,24 @@ function tabImage(){
   tab2.className=''
 }
 tabImage()
+
+function tabShowImageControls(){
+  imageParams.style.display='block'
+  algoParams.style.display='none'
+  tab3.className=''
+  tab4.className='active'
+}
+tabShowImageControls()
+
+
+function tabShowAlgorithmControls(){
+  imageParams.style.display='none'
+  algoParams.style.display='block'
+  tab3.className='active'
+  tab4.className=''
+}
+tabShowAlgorithmControls()
+
 
 function selectImage(){
   let d= document.createElement('input')
@@ -259,6 +280,7 @@ function ctrlChange(control){
     sendToWorker([ window.config ]);
 }
 function addController(control, form){
+  if (control.key == 'Image') form = imageParams;
   if (!control.type) control.type = "range"
   let s = document.createElement("input")
   Object.assign(s, control)
@@ -349,8 +371,11 @@ function loadWorker(src){
       if (src==window.algo) return;
       window.algo=src
       algoParams.innerHTML="";
+      imageParams.innerHTML="";
       data.forEach(c=>addController( c, algoParams ))
       process()
+
+      
 
     // message, e.g. progress bar
     } else if (type == 'msg') {
