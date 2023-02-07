@@ -4,12 +4,16 @@ I came across Plotterfun 'cause I built a [Universal Pen Holder](https://www.zen
 
 Fork from https://github.com/mitxela/plotterfun with a few changes and a new algorithm:
 * Crosshatching [NEW]
+* Sprialhatching [NEW]
+* Spiral Relief [NEW]
 * Halftone [ADD: option Spirals]
 * Subline [ADD: option Vertical & Spiral, reduced pointcount, removed unnecessary double lines]
 
 I split up the image controls and the controls for the algorythms.
 
 ![crosshatching](/screenshots/crosshatching.webp?2023-02-07)
+![spiralhatching](/screenshots/spiralhatching.webp)
+![spiral_relief](/screenshots/spiral_relief.webp)
 ![halftone_spirals](/screenshots/halftone_spirals.webp?2023-02-07)
 ![subline-vertical](/screenshots/subline-vertical.webp?2023-02-07)
 ![subline-spiral](/screenshots/subline-spiral.webp?2023-02-07)
