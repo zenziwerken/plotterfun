@@ -264,3 +264,25 @@ function postCircles(data){
   postMessage(['svg-path',pathstring])
 }
 
+function postPolygons(data){
+  let pathstring="";
+
+  // either a list of points, or a list of lists of points
+  if (typeof data[0][0] !== "object") data = [data] 
+
+  if (data[0][0].x) {
+    for (let p in data) {
+      pathstring += ' M'+data[p][0].x.toFixed(2)+','+data[p][0].y.toFixed(2);
+      for (let i=1;i<data[p].length;i++) pathstring+='L'+data[p][i].x.toFixed(2)+','+data[p][i].y.toFixed(2);
+      pathstring +=' Z '
+    }
+  } else {
+    for (let p in data) {
+      pathstring += ' M'+data[p][0][0].toFixed(2)+','+data[p][0][1].toFixed(2);
+      for (let i=1;i<data[p].length;i++) pathstring+='L'+data[p][i][0].toFixed(2)+','+data[p][i][1].toFixed(2);
+      pathstring +=' Z '
+    }
+  }
+  postMessage(['svg-path',pathstring])
+}
+

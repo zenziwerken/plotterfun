@@ -8,7 +8,7 @@ Fork from https://github.com/mitxela/plotterfun with new algorithms and a few ch
 * Crosshatching [NEW]
 * Sprialhatching [NEW]
 * Spiral Relief [NEW]
-* Halftone [ADD: option Spirals]
+* Halftone [ADD: option Spirals, Squares]
 * Subline [ADD: option Vertical & Spiral, reduced pointcount, removed unnecessary double lines]
 
 I split up the image controls and the controls for the algorythms.
@@ -17,5 +17,6 @@ I split up the image controls and the controls for the algorythms.
 ![spiralhatching](/screenshots/spiralhatching.webp)
 ![spiral_relief](/screenshots/spiral_relief.webp)
 ![halftone_spirals](/screenshots/halftone_spirals.webp)
-![subline-vertical](/screenshots/subline-vertical.webp)
-![subline-spiral](/screenshots/subline-spiral.webp)
+![halftone_spirals](/screenshots/halftone_squares.webp)
+![subline_vertical](/screenshots/subline_vertical.webp)
+![subline_spiral](/screenshots/subline_spiral.webp)

@@ -3,9 +3,9 @@ importScripts('helpers.js', 'external/stackblur.min.js')
 postMessage(['sliders', defaultControls.concat([
   { label: 'Divisions', value: 25, min: 10, max: 100 },
   { label: 'Factor', value: 100, min: 10, max: 400 },
-  { label: 'Cutoff', value: 0, min: 0, max: 254},
+  { label: 'Cutoff', value: 1, min: 0, max: 254},
   { label: 'Interlaced', type: 'checkbox' },
-  { label: 'Type', type:'select', options:['Circles', 'Diamond', 'Spirals']},
+  { label: 'Type', type:'select', options:['Circles', 'Diamond', 'Squares', 'Spirals']},
 ])]);
 
 
@@ -22,9 +22,9 @@ onmessage = function (e) {
 
   let hm = major / 2
   let tog = false
-  let circles = []
-  let lines   = []
-  let spirals = []
+  let circles  = []
+  let lines    = []
+  let polygons = []
 
   for (let y = hm; y < config.height; y += major) {
     tog = !tog;
@@ -36,15 +36,17 @@ onmessage = function (e) {
       let radius = z * hm / 255 * factor / 100;
       switch (type) {
 
+      case 'Squares': {
+        for (r = radius; r >= 0; r--) {
+          let cube = [ [x - r,y - r], [x + r,y - r], [x + r, y + r], [x - r, y + r] ];
+          polygons.push(cube);
+        }
+      } break;
+
       case 'Diamond': {
-        let p1 = [x - radius, y];
-        let p2 = [x, y - radius];
-        let p3 = [x + radius, y];
-        let p4 = [x, y + radius];
-        lines.push([p1, p2]);
-        lines.push([p2, p3]);
-        lines.push([p3, p4]);
-        lines.push([p4, p1]);
+        let r = radius;
+        let diamond = [ [x,y + r], [x + r,y], [x, y - r], [x - r,y] ];
+        polygons.push(diamond);
       } break;
 
       // adapted from stipple.js
@@ -58,7 +60,7 @@ onmessage = function (e) {
         }
       }
       if (spiral.length>0)
-        spirals.push(spiral)
+      lines.push(spiral)
       } break;
 
       default: //Circles
@@ -70,9 +72,11 @@ onmessage = function (e) {
 
   if (circles.length>0)
     postCircles(circles);
+
   if (lines.length>0)
     postLines(lines);
-  if (spirals.length>0)
-    postLines(spirals);
+
+  if (polygons.length>0)
+    postPolygons(polygons);
 }
 
