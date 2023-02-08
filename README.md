@@ -7,7 +7,7 @@ Fork from https://github.com/mitxela/plotterfun with new algorithms and a few ch
 * Sprialhatching [NEW]
 * Spiral Relief [NEW]
 * Halftone [ADD: option Squares, filled elements (circle will be spirals)]
-* Subline [ADD: option Vertical & Spiral, reduced pointcount, removed unnecessary double lines]
+* Subline [ADD: option Vertical & Spiral, reduced pointcount, removed unnecessary double center lines]
 
 ## Try it [here](https://zenziwerken.github.io/plotterfun/main.htm)!
 
