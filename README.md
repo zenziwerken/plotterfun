@@ -11,7 +11,8 @@ Fork from https://github.com/mitxela/plotterfun with new algorithms and a few ch
 
 ## Try it [here](https://zenziwerken.github.io/plotterfun/main.htm)!
 
-I split up the image controls and the controls for the algorythms.
+I split up the image controls and the controls for the algorithms and
+put the algorithm-scripts in a subfolder for a better overview.
 
 ![crosshatching](/screenshots/crosshatching.webp)
 ![spiralhatching](/screenshots/spiralhatching.webp)
