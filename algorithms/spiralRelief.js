@@ -1,4 +1,4 @@
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Displacement', value: 15, min: 1, max: 50, step: 1},

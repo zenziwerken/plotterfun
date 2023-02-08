@@ -1,4 +1,4 @@
-importScripts('helpers.js', 'external/stackblur.min.js')
+importScripts('../helpers.js', 'external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Scale', value: 10, min: 2, max: 100},

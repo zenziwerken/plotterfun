@@ -1,4 +1,4 @@
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
   { label: 'Threshold',  value: 100, min: 0, max: 255, step: 1 },

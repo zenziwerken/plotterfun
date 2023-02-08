@@ -1,4 +1,4 @@
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Rays', value: 1000, min: 100, max: 5000},

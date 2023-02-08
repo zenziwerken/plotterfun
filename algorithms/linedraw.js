@@ -1,4 +1,4 @@
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', [
   {label: 'Contours', type:'checkbox', checked:true},

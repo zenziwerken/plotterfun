@@ -1,7 +1,7 @@
 /**
  * Algorithm by j-waal
  */
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Order', value: 5, min: 1, max: 6},

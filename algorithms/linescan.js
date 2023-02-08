@@ -2,7 +2,7 @@
  * Algorithm by j-waal
  */
 
-importScripts('helpers.js')
+importScripts('../helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
     { label: 'Spacing', value: 5, min: 1, max: 20, step: 1 },
