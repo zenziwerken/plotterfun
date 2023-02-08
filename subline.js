@@ -1,17 +1,20 @@
-importScripts('helpers.js')
+importScripts('helpers.js', 'external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
   {label: 'Line Count', value: 50, min: 10, max: 200},
-  {label: 'Sublines', value: 3, min: 1, max: 10},
+  {label: 'Sublines', value: 3, min: 2, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
-  {label: 'Sampling', value: 1, min: 0.5, max: 5, step: 0.1},
+  {label: 'Sampling', value: 5, min: 0.5, max: 5, step: 0.1},
 ])]);
 
 
 onmessage = function(e) {
   const [ config, pixData ] = e.data;
-  const getPixel = pixelProcessor(config, pixData)
+
+  // Blurring the image will give less distorted results
+  StackBlur.imageDataRGB(pixData, 0,0,config.width,config.height, Math.floor(config.Sampling));
+  const getPixel = pixelProcessor(config, pixData);
 
   const height = config.height - 1;
   const width  = config.width;
@@ -33,7 +36,7 @@ onmessage = function(e) {
       const cy = config.height / 2;
       const spacing = width / 5 / config['Line Count'];
       let squiggleData2 = [];
-      function inside(x,y){ return (x>=0 && y>=0 && x<width && y<height) }
+
       for (let j = 0; j < sublines; j++) {
         let radius = 5;
         let theta = 0;
@@ -41,22 +44,22 @@ onmessage = function(e) {
         let line  = [];
         let line2 = [];
         while ((x > 0 && y > 0) && (x < width && y < height)) {
-          if (inside(x,y)) {
             z = getPixel( x , y );
             let displacement = z * amplitude * 2 * j;
             line.push([
               cx + (radius + displacement) * Math.sin(theta) ,
               cy + (radius + displacement) * Math.cos(theta)
             ])
-            if (j > 0) line2.push([
+            if (j > 0) { // The centerline does not need to be doubled
+              line2.push([
               cx + (radius - displacement) * Math.sin(theta) ,
               cy + (radius - displacement) * Math.cos(theta)
-            ])
-          }
+              ])
+            }
           let incr = Math.asin(1/radius);
           radius += incr * spacing;
           switch (direction) {
-            case 'Spiral cw': theta  -= incr; break;
+            case 'Spiral cw':  theta  -= incr; break;
             case 'Spiral ccw': theta  += incr;
           }
           x = Math.floor( cx + radius * Math.sin(theta));
@@ -89,9 +92,8 @@ onmessage = function(e) {
         } 
         z = getPixel(x, height)
         r = amplitude * j * z;
-        //if (j == 0) {line.push([x + r, height + 10]);} else {line.push([x + r, height]);}
         line.push([x + r, height]);
-        if (r_sum > 10) {
+        if (r_sum > 10) { // The centerline does not need to be doubled
           line.push([x - r, height])
           for (let y = height; y > 0 ; y -= incr_y) {
             let z = getPixel(x, y)
@@ -128,7 +130,7 @@ onmessage = function(e) {
           r_sum += r;
         } 
         line.push([width, y + (amplitude * j * getPixel(width, y))]);
-        if (r_sum > 10) {
+        if (r_sum > 10) { // The centerline does not need to be doubled
           line.push([width, y - (amplitude * j * getPixel(width, y))])
           for (let x = width; x >=0 ; x -= incr_x) {
             let z = getPixel(x, y)
