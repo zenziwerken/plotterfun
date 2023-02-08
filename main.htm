@@ -61,7 +61,7 @@ H:<input id=pch type=number min=10 value=600 oninput='changeSize()'>
 
 <form id=algoSelect>
 Algorithm: 
-<select id=algorithm onchange='loadWorker(this.value)'>
+<select id=algorithm onchange='loadWorker("algorithms/" + this.value)'>
 <option value=squiggle.js>Squiggle</option>
 <option value=squiggleLeftRight.js>Squiggle Left/Right</option>
 <option value=spiral.js>Spiral</option>
