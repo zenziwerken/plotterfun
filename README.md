@@ -13,9 +13,9 @@ Fork from https://github.com/mitxela/plotterfun with new algorithms and a few ch
 
 I split up the image controls and the controls for the algorythms.
 
-![crosshatching](/screenshots/crosshatching.webp?2023-02-07)
+![crosshatching](/screenshots/crosshatching.webp)
 ![spiralhatching](/screenshots/spiralhatching.webp)
 ![spiral_relief](/screenshots/spiral_relief.webp)
-![halftone_spirals](/screenshots/halftone_spirals.webp?2023-02-07)
-![subline-vertical](/screenshots/subline-vertical.webp?2023-02-07)
-![subline-spiral](/screenshots/subline-spiral.webp?2023-02-07)
+![halftone_spirals](/screenshots/halftone_spirals.webp)
+![subline-vertical](/screenshots/subline-vertical.webp)
+![subline-spiral](/screenshots/subline-spiral.webp)
