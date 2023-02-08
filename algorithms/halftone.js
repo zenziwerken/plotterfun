@@ -1,4 +1,4 @@
-importScripts('../helpers.js', 'external/stackblur.min.js')
+importScripts('../helpers.js', '../external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   { label: 'Divisions', value: 25, min: 10, max: 100 },
