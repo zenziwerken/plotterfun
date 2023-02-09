@@ -1,5 +1,3 @@
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
   {label: 'Angle', value: 0, min: 0, max: 360},
   {label: 'Step size', value: 5, min: 1, max: 20, step: 0.1},

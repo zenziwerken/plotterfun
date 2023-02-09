@@ -1,5 +1,3 @@
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
   {label: 'Rays', value: 1000, min: 100, max: 5000},
   {label: 'Threshold', value: 128, min: 1, max: 254},

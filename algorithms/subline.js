@@ -93,7 +93,6 @@ onmessage = function(e) {
           let r
           for (let y = 0; y <= height; y += incr_y) {
             let z = getPixel(x, y)
-            r = amplitude * j * z;
             if (z < cutoff && line.length > 0) {
               line.push( [x, y]);
               line2.push([x, y]);
@@ -106,6 +105,7 @@ onmessage = function(e) {
                 line.push( [x, y]);
                 line2.push([x, y]);
               }
+              r = amplitude * j * z;
               if (r.toFixed(precision) != lastr.toFixed(precision) ) {
                 line.push( [x + r, y]);
                 line2.push([x - r, y]);
@@ -133,7 +133,7 @@ onmessage = function(e) {
         let r
         for (let x = 0; x <= width; x += incr_x) {
           let z = getPixel(x, y)
-          r = amplitude * j * z;
+          
           if (z < cutoff && line.length > 0) {
             line.push( [x, y]);
             line2.push([x, y]);
@@ -146,6 +146,7 @@ onmessage = function(e) {
               line.push( [x, y]);
               line2.push([x, y]);
             }
+            r = amplitude * j * z;
             if (r.toFixed(precision) != lastr.toFixed(precision) ) {
               line.push( [x, y + r]);
               line2.push([x, y - r]);

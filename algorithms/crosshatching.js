@@ -2,8 +2,6 @@
  * Based on linescan by Algorithm by j-waal
  */
 
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
     { label: 'Minlength', value: 2, min: 0, max: 32, step: 1 },
 

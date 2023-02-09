@@ -413,7 +413,9 @@ function download(){
 
   const downloadLink = document.createElement("a");
   downloadLink.href = URL.createObjectURL(blob);
-  downloadLink.download = window.algo.replace('.js','_') + Date.now() + ".svg";
+  //replace('algorithms_','')
+  //downloadLink.download = window.algo.replace('.js','_') + Date.now() + ".svg";
+  downloadLink.download = window.algo.replace('algorithms/','').replace('.js','_') + Date.now() + ".svg";
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);

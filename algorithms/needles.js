@@ -1,5 +1,3 @@
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
   {label: 'Needles', value: 100, min: 100, max: 10000},
   {label: 'Max Length', value: 5, min: 0.1, max: 40, step: 0.1},

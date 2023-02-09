@@ -2,8 +2,6 @@
  * Algorithm by Tim Koop https://github.com/tkoop 
  */
 
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
     { label: 'Resolution', value: 2, min: 1, max: 20, step: 1 },
     { label: 'Line Direction', value: 0, min: 0, max: 180, step: 1 },

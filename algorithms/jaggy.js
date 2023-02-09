@@ -2,8 +2,6 @@
  * Algorithm by Tim Koop https://github.com/tkoop 
  */
 
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
     { label: 'Seed', value: 50, min: 0, max: 100, step: 1 },
 ])]);

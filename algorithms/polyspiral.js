@@ -1,5 +1,3 @@
-importScripts('../helpers.js')
-
 postMessage(['sliders', defaultControls.concat([
   {label: 'Polygon', value: 4, min: 3, max: 8},
   {label: 'Frequency', value: 150, min: 5, max: 256},
