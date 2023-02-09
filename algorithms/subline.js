@@ -1,5 +1,5 @@
 //importScripts('../external/stackblur.min.js')
-importScripts('helpers.js', 'external/stackblur.min.js')
+importScripts('helpers.js', '../external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
