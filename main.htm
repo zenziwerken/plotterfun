@@ -61,7 +61,7 @@ H:<input id=pch type=number min=10 value=600 oninput='changeSize()'>
 
 <form id=algoSelect>
 Algorithm: 
-<select id=algorithm onchange='loadWorker("algorithms/" + this.value)'>
+<select id=algorithm onchange='loadWorker(this.value)'>
 <option value=squiggle.js>Squiggle</option>
 <option value=squiggleLeftRight.js>Squiggle Left/Right</option>
 <option value=spiral.js>Spiral</option>
@@ -352,7 +352,7 @@ function loadWorker(src){
     // Workers not working - fall back to embedding the script
     window.myWorker={terminate:()=>{}}
     window.importScripts=function(...args){
-      for (let a of args) appendScript(a)
+      for (let a of args) appendScript('plotterfun/' + a)
     }
     window.postMessage=function(msg){
       myWorker.onmessage({data:msg})
@@ -412,9 +412,7 @@ function download(){
   const blob = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
   const downloadLink = document.createElement("a");
   downloadLink.href = URL.createObjectURL(blob);
-  //replace('algorithms_','')
-  //downloadLink.download = window.algo.replace('.js','_') + Date.now() + ".svg";
-  downloadLink.download = window.algo.replace('algorithms','_') + Date.now() + ".svg";
+  downloadLink.download = window.algo.replace('.js','_') + Date.now() + ".svg";
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
