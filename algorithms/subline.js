@@ -86,13 +86,14 @@ onmessage = function(e) {
       const incr_x    = Math.floor(height / lineCount);
       const incr_y    = config.Smoothing;
       for (let x = 0; x <= width; x += incr_x) {
-        for (let j = 0; j < sublines; j++) {
+        for (let j = 0; j <= sublines; j++) {
           let line  = [];
           let line2 = [];
           let lastr = -1;
           let r
           for (let y = 0; y <= height; y += incr_y) {
             let z = getPixel(x, y)
+            r = amplitude * j * z;
             if (z < cutoff && line.length > 0) {
               line.push( [x, y]);
               line2.push([x, y]);
@@ -105,7 +106,6 @@ onmessage = function(e) {
                 line.push( [x, y]);
                 line2.push([x, y]);
               }
-              r = amplitude * j * z;
               if (r.toFixed(precision) != lastr.toFixed(precision) ) {
                 line.push( [x + r, y]);
                 line2.push([x - r, y]);
@@ -115,8 +115,10 @@ onmessage = function(e) {
           }
           line.push( [x + r, height]);
           line2.push([x - r, height]);
-          squiggleData.push(line);
-          squiggleData2.push(line2.reverse()); 
+          if (line.length > 0)
+            squiggleData.push(line);
+          if (line2.length > 0)
+            squiggleData2.push(line2.reverse()); 
         }
       }
       squiggleData = squiggleData.concat(squiggleData2)
@@ -126,14 +128,14 @@ onmessage = function(e) {
     const incr_x    = config.Smoothing;
     const incr_y    = Math.floor(width / lineCount);
     for (let y = 0; y <= height; y += incr_y) {
-      for (let j = 0; j < sublines; j++) {
+      for (let j = 0; j <= sublines; j++) {
         let line  = [];
         let line2 = [];
         let lastr = -1;
         let r
         for (let x = 0; x <= width; x += incr_x) {
           let z = getPixel(x, y)
-          
+          r = amplitude * j * z;
           if (z < cutoff && line.length > 0) {
             line.push( [x, y]);
             line2.push([x, y]);
@@ -146,7 +148,6 @@ onmessage = function(e) {
               line.push( [x, y]);
               line2.push([x, y]);
             }
-            r = amplitude * j * z;
             if (r.toFixed(precision) != lastr.toFixed(precision) ) {
               line.push( [x, y + r]);
               line2.push([x, y - r]);
