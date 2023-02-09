@@ -3,7 +3,7 @@ importScripts('../external/stackblur.min.js')
 postMessage(['sliders', defaultControls.concat([
   {label: 'Direction', type:'select', options:['Horizontal', 'Vertical', 'Spiral cw', 'Spiral ccw']},
   {label: 'Line Count', value: 50, min: 10, max: 200},
-  {label: 'Sublines', value: 3, min: 2, max: 10},
+  {label: 'Sublines', value: 3, min: 1, max: 10},
   {label: 'Amplitude', value: 1, min: 0.1, max: 5, step: 0.1},
   {label: 'Smoothing', value: 5, min: 1, max: 5, step: 0.1},
   {label: 'Cutoff', value: 0, min: 0, max: 255, step: 1},
@@ -90,9 +90,10 @@ onmessage = function(e) {
           let line  = [];
           let line2 = [];
           let lastr = -1;
+          let r
           for (let y = 0; y <= height; y += incr_y) {
             let z = getPixel(x, y)
-            let r = amplitude * j * z;
+            r = amplitude * j * z;
             if (z < cutoff && line.length > 0) {
               line.push( [x, y]);
               line2.push([x, y]);
@@ -129,9 +130,10 @@ onmessage = function(e) {
         let line  = [];
         let line2 = [];
         let lastr = -1;
+        let r
         for (let x = 0; x <= width; x += incr_x) {
           let z = getPixel(x, y)
-          let r = amplitude * j * z;
+          r = amplitude * j * z;
           if (z < cutoff && line.length > 0) {
             line.push( [x, y]);
             line2.push([x, y]);
