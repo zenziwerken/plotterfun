@@ -1,3 +1,5 @@
+importScripts('helpers.js')
+
 postMessage(['sliders', defaultControls.concat([
   {label: 'Frequency', value: 50, min: 1, max: 100},
   {label: 'Line Count', value: 20, min: 10, max: 100},

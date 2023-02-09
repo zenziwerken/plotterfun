@@ -1,6 +1,7 @@
 /**
  * Algorithm by Tim Koop https://github.com/tkoop 
  */
+importScripts('helpers.js')
 
 postMessage(['sliders', defaultControls.concat([
     { label: 'Resolution', value: 2, min: 1, max: 20, step: 1 },

@@ -3,6 +3,8 @@
  * Inspiration from Tim Holman - Generative Art Speedrun
  * rectangleworld - Random Braids
  */
+importScripts('helpers.js')
+
 postMessage(['sliders', defaultControls.concat([
 	{label: 'Frequency', value: 150, min: 5, max: 256},
 	{label: 'Line Count', value: 8, min: 5, max: 200},

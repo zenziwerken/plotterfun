@@ -1,3 +1,5 @@
+importScripts('helpers.js')
+
 postMessage(['sliders', defaultControls.concat([
   {label: 'Wave Speed', value: 20, min: 1, max: 100},
   {label: 'Wave Amplitude', value: 10, min: 0, max: 50, step: 0.1},

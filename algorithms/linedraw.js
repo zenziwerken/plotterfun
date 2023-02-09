@@ -1,3 +1,5 @@
+importScripts('helpers.js')
+
 postMessage(['sliders', [
   {label: 'Contours', type:'checkbox', checked:true},
   {label: 'Contour detail', value: 8, min: 1, max: 16},
