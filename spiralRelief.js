@@ -1,8 +1,9 @@
-importScripts('helpers.js')
+importScripts('helpers.js', 'external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Displacement', value: 15, min: 1, max: 50, step: 1},
   {label: 'Spacing', value: 0.7, min: 0.5, max: 5, step: 0.1},
+  {label: 'Smoothing', value: 3, min: 1, max: 5, step: 0.1},
 ])]);
 
 onmessage = function(e) {
@@ -10,6 +11,8 @@ onmessage = function(e) {
 
   const spacing = parseFloat(config.Spacing);
   const displacement = parseFloat(config.Displacement);
+
+  StackBlur.imageDataRGB(pixData, 0,0,config.width,config.height, Math.floor(config.Smoothing));
 
   const getPixel = pixelProcessor(config, pixData)
   const cx = config.width/2;

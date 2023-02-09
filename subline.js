@@ -39,7 +39,7 @@ onmessage = function(e) {
       const spacing = width / 5 / config['Line Count'];
       
 
-      for (let j = 0; j < sublines; j++) {
+      for (let j = 0; j <= sublines; j++) {
         let radius = 5;
         let theta = 0;
         let x = cx, y = cy;
