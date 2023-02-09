@@ -352,7 +352,7 @@ function loadWorker(src){
     // Workers not working - fall back to embedding the script
     window.myWorker={terminate:()=>{}}
     window.importScripts=function(...args){
-      for (let a of args) appendScript('plotterfun/' + a)
+      for (let a of args) appendScript(a)
     }
     window.postMessage=function(msg){
       myWorker.onmessage({data:msg})
