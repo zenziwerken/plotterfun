@@ -1,4 +1,4 @@
-importScripts('helpers.js')
+importScripts('helpers.js', 'external/stackblur.min.js')
 
 postMessage(['sliders', defaultControls.concat([
   {label: 'Max Stipples', value: 2000, min: 500, max: 10000},
