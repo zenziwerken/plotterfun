@@ -61,7 +61,7 @@ onmessage = function(e) {
                 line.push([ cx + radius * sin,cy + radius * cos]);
                 line2.push([cx + radius * sin,cy + radius * cos]);
               }
-              let displacement = z * amplitude * 2 * j;
+              let displacement = z * amplitude * 1.3 * j;
               line.push([cx + (radius + displacement) * sin, cy + (radius + displacement) * cos ]);
               if (j > 0)  // The centerline does not need to be doubled
                 line2.push([cx + (radius - displacement) * sin, cy + (radius - displacement) * cos]);
