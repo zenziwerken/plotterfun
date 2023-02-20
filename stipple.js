@@ -1,8 +1,16 @@
 importScripts('helpers.js', 'external/rhill-voronoi-core.min.js', 'external/stackblur.min.js')
 
+defaultControls = [
+  {label: 'Inverted', type:'checkbox', key: 'Image', noRestart:true},
+  {label: 'Brightness', value: 0, min: -100, max: 100, key: 'Image', noRestart:true},
+  {label: 'Contrast', value: 0, min: -100, max: 100, key: 'Image', noRestart:true},
+  {label: 'Min brightness', value: 0, min: 0, max: 255, key: 'Image', noRestart:true},
+  {label: 'Max brightness', value: 255, min: 0, max: 255, key: 'Image', noRestart:true},
+]
+
 postMessage(['sliders', defaultControls.concat([
-  {label: 'Max Stipples', value: 2000, min: 500, max: 10000},
-  {label: 'Max Iterations', value: 30, min:2, max:200},
+  {label: 'Max Stipples', value: 2000, min: 500, max: 10000, noRestart:true},
+  {label: 'Max Iterations', value: 30, min:2, max:200, noRestart:true},
   {label: 'Min dot size', value: 2, min: 0.5, max: 8, step:0.1, noRestart:true},
   {label: 'Dot size range', value: 4, min: 0, max: 20, step:0.1, noRestart:true},
   {label: 'TSP Art', type:'checkbox', noRestart:true},
@@ -18,6 +26,7 @@ postMessage(['sliders', defaultControls.concat([
 
 var particles, config, pixData, pixelCache =[];
 onmessage = function(e) {
+
   if (!particles) {
     [ config, pixData ] = e.data;
     render()
@@ -65,7 +74,6 @@ function redraw(tsp){
         postLines(points)
       } break;
     case 'Pentagrams':
-
       let px = [], py = []
       for (let p=0;p<360;p+=360/5) {
         px.push( Math.sin(p*Math.PI/180))
@@ -209,6 +217,7 @@ async function render() {
     redraw(0)
   }
 
+ if (config['TSP Art']) {
   postMessage(['msg', "Route optimization"]);
 
   function distance(p1,p2){ 
@@ -274,7 +283,9 @@ async function render() {
     postMessage(['msg', `Optimizing route... [${numSwaps.toFixed(2)}]`]);
   }
   redraw(config['TSP Art'])
+}
   postMessage(['msg', "Done"]);
+
 }
 
 })();
