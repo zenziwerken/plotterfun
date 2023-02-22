@@ -8,6 +8,7 @@ Fork from https://github.com/mitxela/plotterfun with new algorithms and a few ch
 * Spiral Relief [NEW]
 * Halftone [ADD: option Squares, filled elements (circle will be spirals)]
 * Subline [ADD: option Vertical & Spiral, reduced pointcount, removed unnecessary double center lines]
+* Stipple [ADD: option Square, optional leave out TSP optimization]
 
 ## Try it [here](https://zenziwerken.github.io/plotterfun/main.htm)!
 
@@ -20,3 +21,4 @@ I split up the image controls and the controls for the algorithms.
 ![halftone_spirals](/screenshots/halftone_squares.webp)
 ![subline_vertical](/screenshots/subline_vertical.webp)
 ![subline_spiral](/screenshots/subline_spiral.webp)
+![halftone_spirals](/screenshots/stipple_squares.webp.webp)
