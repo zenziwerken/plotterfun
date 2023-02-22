@@ -21,4 +21,4 @@ I split up the image controls and the controls for the algorithms.
 ![halftone_spirals](/screenshots/halftone_squares.webp)
 ![subline_vertical](/screenshots/subline_vertical.webp)
 ![subline_spiral](/screenshots/subline_spiral.webp)
-![halftone_spirals](/screenshots/stipple_squares.webp.webp)
+![halftone_spirals](/screenshots/stipple_squares.webp)
