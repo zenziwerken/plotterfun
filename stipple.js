@@ -14,7 +14,8 @@ postMessage(['sliders', defaultControls.concat([
   {label: 'Min dot size', value: 2, min: 0.5, max: 8, step:0.1, noRestart:true},
   {label: 'Dot size range', value: 4, min: 0, max: 20, step:0.1, noRestart:true},
   {label: 'TSP Art', type:'checkbox', noRestart:true},
-  {label: 'Stipple type', type:'select', options:['Circles', 'Spirals', 'Hexagons', 'Pentagrams', 'Snowflakes'], noRestart:true},
+  {label: 'Optimize TSP', type:'checkbox', noRestart:true},
+  {label: 'Stipple type', type:'select', options:['Circles', 'Spirals', 'Hexagons', 'Pentagrams', 'Snowflakes','Squares'], noRestart:true},
 ])]);
 
 
@@ -51,10 +52,25 @@ function redraw(tsp){
 
     let points=[]
     switch (config['Stipple type']) {
-    case 'Spirals':
+    case 'Squares': {
       for (let p in particles) {
-        let theta=0, r=getPixel(particles[p].x,particles[p].y)*scale + minsize, spiral=[]
-        while (r>=0.1) {
+        let x = particles[p].x, y = particles[p].y, radius = getPixel(x,y) * scale + minsize, cube = []
+        for (r = radius; r >= 0; r--) {
+          if (r == radius) cube.push([x - r, y - r + 1]);
+          cube.push([x - r, y - r]);
+          cube.push([x + r, y - r]);
+          cube.push([x + r, y + r]);
+          cube.push([x - r, y + r]);
+          cube.push([x - r, y - r + 1]);
+        }
+        points.push(cube)
+      }
+      postLines(points);
+    } break;
+    case 'Spirals': {
+      for (let p in particles) {
+        let theta = 0, r = getPixel(particles[p].x,  particles[p].y) * scale + minsize, spiral = [];
+        while (r >= 0.1) {
           spiral.push( [particles[p].x + r*Math.cos(theta), particles[p].y + r*Math.sin(theta)] )
           theta+=0.5
           if (theta>6.3) r-=0.1 //do one full loop before spiraling in
@@ -62,21 +78,20 @@ function redraw(tsp){
         points.push(spiral)
       }
       postLines(points)
-      break;
+    } break;
     case 'Hexagons': {
         let s60 = Math.sin(60*Math.PI/180), c60 = 0.5 
         for (let p in particles) {
-          let x=particles[p].x, y=particles[p].y
-          let r=getPixel(x,y)*scale + minsize 
-          let hex = [ [x+r,y], [x+r*c60,y-r*s60], [x-r*c60, y-r*s60], [x-r, y], [x-r*c60, y+r*s60], [x+r*c60,y+r*s60], [x+r,y] ]
+          let x = particles[p].x, y = particles[p].y, r = getPixel(x,y) * scale + minsize;
+          let hex = [ [x+r,y], [x+r*c60,y-r*s60], [x-r*c60, y-r*s60], [x-r, y], [x-r*c60, y+r*s60], [x+r*c60,y+r*s60], [x+r,y] ];
           points.push(hex)
         }
         postLines(points)
-      } break;
-    case 'Pentagrams':
+    } break;
+    case 'Pentagrams': {
       let px = [], py = []
       for (let p=0;p<360;p+=360/5) {
-        px.push( Math.sin(p*Math.PI/180))
+        px.push(Math.sin(p*Math.PI/180))
         py.push(Math.cos(p*Math.PI/180) )
       }
       for (let p in particles) {
@@ -92,7 +107,7 @@ function redraw(tsp){
         ])
       }
       postLines(points)
-      break;
+    } break;
     case 'Snowflakes': {
         let s60 = Math.sin(60*Math.PI/180), c60 = 0.5 
         for (let p in particles) {
@@ -103,7 +118,7 @@ function redraw(tsp){
           points.push([ [x-r*c60,y+r*s60] , [x+r*c60,y-r*s60] ])
         }
         postLines(points)
-      } break;
+    } break;
     default: //circles
       for (let p in particles)
         particles[p].r=getPixel(particles[p].x,particles[p].y)*scale + minsize 
@@ -217,7 +232,7 @@ async function render() {
     redraw(0)
   }
 
- if (config['TSP Art']) {
+ if (config['Optimize TSP'] || config['TSP Art']) {
   postMessage(['msg', "Route optimization"]);
 
   function distance(p1,p2){ 
